@@ -59,6 +59,12 @@ i {
   margin-bottom: 10px;
 }
 
+p {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
 i.orange {
   color: orange;
 }
