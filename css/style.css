@@ -13,7 +13,19 @@ nav {
   padding: 10px;
 
   display: flex;
+  justify-content: space-between;
+}
+
+.nav-left {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   gap: 10px;
 }
 

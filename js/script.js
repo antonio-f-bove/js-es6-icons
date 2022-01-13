@@ -113,6 +113,18 @@ const iconsList = [
 	}
 ];
 
+function getRandomHexColor() {
+  const charPool = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+  let hexColor = '#';
+
+  for (let i = 0; i < 6; i++) {
+    const randHexNum = Math.floor(Math.random() * 16);
+    hexColor += charPool[randHexNum];
+  }
+
+  return hexColor
+}
+
 function getIconHtmlTemplate(iconInfo) {
   const { name, prefix, family, color } = iconInfo;
 
@@ -122,7 +134,15 @@ function getIconHtmlTemplate(iconInfo) {
   `;
 }
 
+function removeColorClasses(element) {
+  const colors = ['orange', 'green', 'blue'];
 
+  colors.forEach((color) => {
+    element.classList.remove(color);
+  })
+}
+
+// -------------------------------------------------
 
 const container = document.getElementById('icons-container');
 
@@ -134,6 +154,25 @@ iconsList.forEach(element => {
 
   container.append(newBox);
 });
+
+const boxesHtml = container.querySelectorAll('.box');
+
+const colorButtonHtml = document.getElementById('colors');
+// ricoloriamo le icone
+colorButtonHtml.addEventListener('click', (event) => {
+  event.preventDefault();
+  
+  boxesHtml.forEach(box => {
+    const icon = box.querySelector('i');
+
+    // prima rimuoviamo le classi colore
+    removeColorClasses(icon);
+
+    console.log(icon.style.color)
+    icon.style.color = getRandomHexColor();
+    console.log(icon.style.color)
+  });
+})
 
 
 const selectHtml = document.getElementById('type-select');
@@ -161,7 +200,6 @@ selectHtml.addEventListener('change', function(event) {
   const showNames = filteredList.map((icon) => {
     return icon.name
   })
-  const boxesHtml = container.querySelectorAll('.box');
   
   boxesHtml.forEach((box) => {
     // aggiungo la classe show nel caso fosse stata rimossa in precedenza
